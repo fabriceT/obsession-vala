@@ -1,0 +1,38 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: obsession 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-09 12:42+0200\n"
+"PO-Revision-Date: 2017-11-09 12:48+0200\n"
+"Last-Translator: Fabrice Thiroux <fabrice.thiroux@free.fr>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/ObSessionWindow.vala:80
+msgid "Cancel"
+msgstr "Annuler"
+
+#: ../src/ObSessionWindow.vala:87
+msgid "Hibernate"
+msgstr "Veille prolongée"
+
+#: ../src/ObSessionWindow.vala:98
+msgid "Reboot"
+msgstr "Redémarrer"
+
+#: ../src/ObSessionWindow.vala:109
+msgid "Turn off"
+msgstr "Éteindre"
+
+#: ../src/ObSessionWindow.vala:141
+msgid "You are about to exit the session."
+msgstr "Vous êtes sur le point de quitter la session."
