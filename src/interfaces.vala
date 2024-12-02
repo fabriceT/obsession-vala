@@ -7,7 +7,7 @@ enum Action {
 }
 
 interface IProvider : Object {
-    public abstract bool query(Action action);
-    public abstract void execute(Action action);
-    public abstract string get_name();
+    public abstract bool query (Action action);
+    public abstract void execute (Action action);
+    public abstract string get_name ();
 }

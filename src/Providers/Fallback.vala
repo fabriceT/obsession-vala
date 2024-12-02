@@ -1,7 +1,14 @@
-class Fallback: IProvider, Object
-{
-    public bool query(Action action)
-    {
+class Fallback: IProvider, Object {
+    public static void execute_command (string cmd) {
+        try {
+            Process.spawn_command_line_async (cmd);
+        }
+        catch (GLib.SpawnError e) {
+            stdout.printf ("Can't spawn process: %s", e.message);
+        }
+    }
+
+    public bool query (Action action) {
         switch (action) {
 
             case Action.HIBERNATE:
@@ -26,15 +33,18 @@ class Fallback: IProvider, Object
 
     public void execute (Action action) {
         switch (action) {
+            case Action.HIBERNATE:
+                break;
+
             case Action.HYBRID_SLEEP:
                 break;
 
             case Action.POWEROFF:
-                Process.spawn_command_line_async ("halt");
+                execute_command ("halt");
                 break;
 
             case Action.REBOOT:
-                Process.spawn_command_line_async("halt -r");
+                execute_command ("halt -r");
                 break;
 
             case Action.SUSPEND:
@@ -42,7 +52,7 @@ class Fallback: IProvider, Object
         }
     }
 
-    public string get_name() {
+    public string get_name () {
         return "Fallback";
     }
 }
