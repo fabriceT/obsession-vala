@@ -8,22 +8,22 @@ class Fallback: IProvider, Object {
         }
     }
 
-    public bool query (Action action) {
+    public bool query (PowerAction action) {
         switch (action) {
 
-            case Action.HIBERNATE:
+            case PowerAction.HIBERNATE:
                 return false;
 
-            case Action.HYBRID_SLEEP:
+            case PowerAction.HYBRID_SLEEP:
                 return false;
 
-            case Action.POWEROFF:
+            case PowerAction.POWEROFF:
                 return true;
 
-            case Action.REBOOT:
+            case PowerAction.REBOOT:
                 return true;
 
-            case Action.SUSPEND:
+            case PowerAction.SUSPEND:
                 return false;
 
             default:
@@ -31,23 +31,23 @@ class Fallback: IProvider, Object {
         }
     }
 
-    public void execute (Action action) {
+    public void execute (PowerAction action) {
         switch (action) {
-            case Action.HIBERNATE:
+            case PowerAction.HIBERNATE:
                 break;
 
-            case Action.HYBRID_SLEEP:
+            case PowerAction.HYBRID_SLEEP:
                 break;
 
-            case Action.POWEROFF:
+            case PowerAction.POWEROFF:
                 execute_command ("halt");
                 break;
 
-            case Action.REBOOT:
+            case PowerAction.REBOOT:
                 execute_command ("halt -r");
                 break;
 
-            case Action.SUSPEND:
+            case PowerAction.SUSPEND:
                 break;
         }
     }

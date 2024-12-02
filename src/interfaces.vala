@@ -1,4 +1,4 @@
-enum Action {
+enum PowerAction {
     HIBERNATE,
     SUSPEND,
     REBOOT,
@@ -7,7 +7,7 @@ enum Action {
 }
 
 interface IProvider : Object {
-    public abstract bool query (Action action);
-    public abstract void execute (Action action);
+    public abstract bool query (PowerAction action);
+    public abstract void execute (PowerAction action);
     public abstract string get_name ();
 }

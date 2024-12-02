@@ -27,25 +27,25 @@ class Systemd: IProvider, Object {
         }
     }
 
-    public bool query (Action action) {
+    public bool query (PowerAction action) {
         if (proxy == null)
             return false;
 
         try {
             switch (action) {
-                case Action.HIBERNATE:
+                case PowerAction.HIBERNATE:
                     return (proxy.can_hibernate () == "yes");
 
-                case Action.HYBRID_SLEEP:
+                case PowerAction.HYBRID_SLEEP:
                     return (proxy.can_hybrid_sleep () == "yes");
 
-                case Action.POWEROFF:
+                case PowerAction.POWEROFF:
                     return (proxy.can_power_off () == "yes");
 
-                case Action.REBOOT:
+                case PowerAction.REBOOT:
                     return (proxy.can_reboot () == "yes");
 
-                case Action.SUSPEND:
+                case PowerAction.SUSPEND:
                     return (proxy.can_suspend () == "yes");
 
                 default:
@@ -57,29 +57,29 @@ class Systemd: IProvider, Object {
         }
     }
 
-    public void execute (Action action) {
+    public void execute (PowerAction action) {
         if (proxy == null)
             return;
 
         try {
             switch (action) {
-                case Action.HIBERNATE:
+                case PowerAction.HIBERNATE:
                     proxy.hibernate (true);
                     break;
 
-                case Action.HYBRID_SLEEP:
+                case PowerAction.HYBRID_SLEEP:
                     proxy.hybrid_sleep (true);
                     break;
 
-                case Action.POWEROFF:
+                case PowerAction.POWEROFF:
                     proxy.power_off (true);
                     break;
 
-                case Action.REBOOT:
+                case PowerAction.REBOOT:
                     proxy.reboot (true);
                     break;
 
-                case Action.SUSPEND:
+                case PowerAction.SUSPEND:
                     proxy.suspend (true);
                     break;
             }

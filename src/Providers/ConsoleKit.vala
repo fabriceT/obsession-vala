@@ -21,17 +21,17 @@ class ConsoleKit: IProvider, Object {
         }
     }
 
-    public bool query (Action action) {
+    public bool query (PowerAction action) {
         if (proxy == null) {
             return false;
         }
 
         try {
             switch (action) {
-                case Action.POWEROFF:
+                case PowerAction.POWEROFF:
                     return (proxy.can_stop () == "yes");
 
-                case Action.REBOOT:
+                case PowerAction.REBOOT:
                     return (proxy.can_restart () == "yes");
 
                 default:
@@ -44,27 +44,27 @@ class ConsoleKit: IProvider, Object {
         }
     }
 
-    public void execute (Action action) {
+    public void execute (PowerAction action) {
         if (proxy == null)
             return;
 
         try {
             switch (action) {
-                case Action.HIBERNATE:
+                case PowerAction.HIBERNATE:
                 break;
 
-                case Action.HYBRID_SLEEP:
+                case PowerAction.HYBRID_SLEEP:
                     break;
 
-                case Action.POWEROFF:
+                case PowerAction.POWEROFF:
                     proxy.stop (true);
                     break;
 
-                case Action.REBOOT:
+                case PowerAction.REBOOT:
                     proxy.restart (true);
                     break;
 
-                case Action.SUSPEND:
+                case PowerAction.SUSPEND:
                     break;
             }
         }

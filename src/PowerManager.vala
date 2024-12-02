@@ -45,39 +45,39 @@ class PowerManager {
         get { return (poweroff_provider != null); }
     }
 
-    private void get_capability (IProvider provider, Action action) {
+    private void get_capability (IProvider provider, PowerAction action) {
         switch (action) {
-            case Action.SUSPEND:
+            case PowerAction.SUSPEND:
                 if (!this.has_suspend && provider.query (action) == true) {
-                    message ("Adding %s for suspend action", provider.get_name ());
+                    message ("Adding %s for suspend Poweraction", provider.get_name ());
                     suspend_provider = provider;
                 }
                 break;
 
-            case Action.HIBERNATE:
+            case PowerAction.HIBERNATE:
                 if (!has_hibernate && provider.query (action) == true) {
-                    message ("Adding %s for hibernation action", provider.get_name ());
+                    message ("Adding %s for hibernation Poweraction", provider.get_name ());
                     hibernate_provider = provider;
                 }
                 break;
 
-            case Action.HYBRID_SLEEP:
+            case PowerAction.HYBRID_SLEEP:
                 if (!has_hybrid_sleep && provider.query (action) == true) {
-                    message ("Adding %s for hybrid sleep action", provider.get_name ());
+                    message ("Adding %s for hybrid sleep Poweraction", provider.get_name ());
                     hybrid_sleep_provider = provider;
                 }
                 break;
 
-            case Action.REBOOT:
+            case PowerAction.REBOOT:
                 if (!has_reboot && provider.query (action) == true) {
-                    message ("Adding %s for reboot action", provider.get_name ());
+                    message ("Adding %s for reboot Poweraction", provider.get_name ());
                     reboot_provider = provider;
                 }
                 break;
 
-            case Action.POWEROFF:
+            case PowerAction.POWEROFF:
                 if (!has_poweroff && provider.query (action) == true) {
-                    message ("Adding %s for poweroff action", provider.get_name ());
+                    message ("Adding %s for poweroff Poweraction", provider.get_name ());
                     poweroff_provider = provider;
                 }
                 break;
@@ -85,60 +85,37 @@ class PowerManager {
     }
 
     private void load_capabilities (IProvider provider) {
-        get_capability (provider, Action.SUSPEND);
-        get_capability (provider, Action.HIBERNATE);
-        get_capability (provider, Action.HYBRID_SLEEP);
-        get_capability (provider, Action.REBOOT);
-        get_capability (provider, Action.POWEROFF);
+        get_capability (provider, PowerAction.SUSPEND);
+        get_capability (provider, PowerAction.HIBERNATE);
+        get_capability (provider, PowerAction.HYBRID_SLEEP);
+        get_capability (provider, PowerAction.REBOOT);
+        get_capability (provider, PowerAction.POWEROFF);
     }
 
-    public void execute (Action action) {
-        switch (action) {
-            case Action.SUSPEND:
-                if (suspend_provider != null)
-                    suspend_provider.execute (Action.SUSPEND);
-                break;
-
-            case Action.HIBERNATE:
-                if (hibernate_provider != null)
-                    hibernate_provider.execute (Action.HIBERNATE);
-                break;
-
-            case Action.HYBRID_SLEEP:
-                if (hybrid_sleep_provider != null)
-                    hybrid_sleep_provider.execute (Action.HYBRID_SLEEP);
-                break;
-
-            case Action.REBOOT:
-                if (reboot_provider != null)
-                    reboot_provider.execute (Action.REBOOT);
-                break;
-
-            case Action.POWEROFF:
-                if (poweroff_provider != null)
-                    poweroff_provider.execute (Action.POWEROFF);
-                break;
-        }
-    }
 
     public void suspend () {
-        execute (Action.SUSPEND);
+        if (suspend_provider != null)
+            suspend_provider.execute (PowerAction.SUSPEND);
     }
 
     public void hibernate () {
-        execute (Action.HIBERNATE);
+        if (hibernate_provider != null)
+            hibernate_provider.execute (PowerAction.HIBERNATE);
     }
 
     public void hybrid_sleep () {
-        execute (Action.HYBRID_SLEEP);
+        if (hybrid_sleep_provider != null)
+            hybrid_sleep_provider.execute (PowerAction.HYBRID_SLEEP);
     }
 
     public void reboot () {
-        execute (Action.REBOOT);
+        if (reboot_provider != null)
+            reboot_provider.execute (PowerAction.REBOOT);
     }
 
     public void poweroff () {
-        execute (Action.POWEROFF);
+        if (poweroff_provider != null)
+            poweroff_provider.execute (PowerAction.POWEROFF);
     }
 
     public void display_providers () {

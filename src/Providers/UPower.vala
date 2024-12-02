@@ -21,17 +21,17 @@ class UPower: IProvider, Object {
         }
     }
 
-    public bool query (Action action) {
+    public bool query (PowerAction action) {
         if (proxy == null)
             return false;
 
         try {
             switch (action) {
                 /*
-                case Action.HIBERNATE:
+                case PowerAction.HIBERNATE:
                     return (proxy.hibernate_allowed () == "yes");
 
-                case Action.SUSPEND:
+                case PowerAction.SUSPEND:
                     return (proxy.suspend_allowed () == "yes");
                 */
                 default:
@@ -43,26 +43,26 @@ class UPower: IProvider, Object {
         }
     }
 
-    public void execute (Action action) {
+    public void execute (PowerAction action) {
         if (proxy == null)
             return;
 
         try {
             switch (action) {
-                case Action.HIBERNATE:
+                case PowerAction.HIBERNATE:
                     proxy.hibernate (true);
                     break;
 
-                case Action.HYBRID_SLEEP:
+                case PowerAction.HYBRID_SLEEP:
                     break;
 
-                case Action.POWEROFF:
+                case PowerAction.POWEROFF:
                      break;
 
-                case Action.REBOOT:
+                case PowerAction.REBOOT:
                     break;
 
-                case Action.SUSPEND:
+                case PowerAction.SUSPEND:
                     proxy.suspend (true);
                     break;
             }
