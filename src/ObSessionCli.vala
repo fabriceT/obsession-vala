@@ -41,9 +41,9 @@ class ObSessionCli : GLib.Application {
         this.release ();
     }
 
-    public override void shutdown () {
-        stdout.printf ("exiting…");
-    }
+    //  public override void shutdown () {
+    //      stdout.printf ("exiting…");
+    //  }
 
     public static int main (string[] args) {
         return new ObSessionCli ().run (args);

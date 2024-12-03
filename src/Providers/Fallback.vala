@@ -12,10 +12,10 @@ class Fallback: IProvider, Object {
         switch (action) {
 
             case PowerAction.HIBERNATE:
-                return false;
+                return true;
 
             case PowerAction.HYBRID_SLEEP:
-                return false;
+                return true;
 
             case PowerAction.POWEROFF:
                 return true;
@@ -24,7 +24,7 @@ class Fallback: IProvider, Object {
                 return true;
 
             case PowerAction.SUSPEND:
-                return false;
+                return true;
 
             default:
                 return false;
