@@ -11,9 +11,9 @@ class ObSessionCli : GLib.Application {
     }
 
     public override int command_line (ApplicationCommandLine command_line) {
-        string[] args = command_line.get_arguments();
+        string[] args = command_line.get_arguments ();
 
-        foreach(var a in args) {
+        foreach (var a in args) {
             stdout.printf ("- %s\n", a);
         }
 
@@ -36,17 +36,16 @@ class ObSessionCli : GLib.Application {
     }
 
     public override void activate () {
-		this.hold ();
-		print ("Activated\n");
-		this.release ();
-	}
+        this.hold ();
+        print ("Activated\n");
+        this.release ();
+    }
 
     public override void shutdown () {
-        stdout.printf ("exiting...");
+        stdout.printf ("exiting…");
     }
 
     public static int main (string[] args) {
         return new ObSessionCli ().run (args);
     }
 }
-
