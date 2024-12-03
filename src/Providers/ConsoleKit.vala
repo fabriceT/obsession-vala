@@ -9,6 +9,7 @@ interface IConsoleKit : Object {
 class ConsoleKit: IProvider, Object {
     IConsoleKit proxy;
 
+
     public ConsoleKit () {
         try {
             proxy = Bus.get_proxy_sync (BusType.SYSTEM,
@@ -20,6 +21,7 @@ class ConsoleKit: IProvider, Object {
             stdout.printf ("--------- %s", e.message);
         }
     }
+
 
     public bool query (PowerAction action) {
         if (proxy == null) {
@@ -43,6 +45,7 @@ class ConsoleKit: IProvider, Object {
             return false;
         }
     }
+
 
     public void execute (PowerAction action) {
         if (proxy == null)
@@ -72,6 +75,7 @@ class ConsoleKit: IProvider, Object {
             message ("%s", e.message);
         }
     }
+
 
     public string get_name () {
         return "ConsoleKit";

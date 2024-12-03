@@ -2,8 +2,8 @@ common_sources = [
   '../vapi/config.vapi',
   'Providers/ConsoleKit.vala',
   'Providers/Fallback.vala',
-  'Providers/Systemd.vala',
   'Providers/UPower.vala',
+  'Providers/Systemd.vala',
   'PowerManager.vala',
   'interfaces.vala'
 ]

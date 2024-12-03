@@ -1,4 +1,6 @@
 class Fallback: IProvider, Object {
+
+
     public static void execute_command (string cmd) {
         try {
             Process.spawn_command_line_async (cmd);
@@ -8,14 +10,15 @@ class Fallback: IProvider, Object {
         }
     }
 
+
     public bool query (PowerAction action) {
         switch (action) {
 
             case PowerAction.HIBERNATE:
-                return false;
+                return true;
 
             case PowerAction.HYBRID_SLEEP:
-                return false;
+                return true;
 
             case PowerAction.POWEROFF:
                 return true;
@@ -24,12 +27,13 @@ class Fallback: IProvider, Object {
                 return true;
 
             case PowerAction.SUSPEND:
-                return false;
+                return true;
 
             default:
                 return false;
         }
     }
+
 
     public void execute (PowerAction action) {
         switch (action) {
@@ -51,6 +55,7 @@ class Fallback: IProvider, Object {
                 break;
         }
     }
+
 
     public string get_name () {
         return "Fallback";
