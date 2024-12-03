@@ -1,4 +1,6 @@
 class Fallback: IProvider, Object {
+
+
     public static void execute_command (string cmd) {
         try {
             Process.spawn_command_line_async (cmd);
@@ -7,6 +9,7 @@ class Fallback: IProvider, Object {
             stdout.printf ("Can't spawn process: %s", e.message);
         }
     }
+
 
     public bool query (PowerAction action) {
         switch (action) {
@@ -31,6 +34,7 @@ class Fallback: IProvider, Object {
         }
     }
 
+
     public void execute (PowerAction action) {
         switch (action) {
             case PowerAction.HIBERNATE:
@@ -51,6 +55,7 @@ class Fallback: IProvider, Object {
                 break;
         }
     }
+
 
     public string get_name () {
         return "Fallback";

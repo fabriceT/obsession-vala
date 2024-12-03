@@ -15,6 +15,7 @@ interface ILogin1 : Object {
 class Systemd: IProvider, Object {
     ILogin1 proxy;
 
+
     public Systemd () {
         try {
             proxy = Bus.get_proxy_sync (BusType.SYSTEM,
@@ -26,6 +27,7 @@ class Systemd: IProvider, Object {
             stdout.printf ("--------- %s", e.message);
         }
     }
+
 
     public bool query (PowerAction action) {
         if (proxy == null)
@@ -88,6 +90,7 @@ class Systemd: IProvider, Object {
             message ("%s", e.message);
         }
     }
+
 
     public string get_name () {
         return "Systemd";

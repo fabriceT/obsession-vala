@@ -3,7 +3,6 @@ common_sources = [
   'Providers/ConsoleKit.vala',
   'Providers/Fallback.vala',
   'Providers/Systemd.vala',
-  'Providers/UPower.vala',
   'PowerManager.vala',
   'interfaces.vala'
 ]

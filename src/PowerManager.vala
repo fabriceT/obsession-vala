@@ -1,7 +1,6 @@
 class PowerManager {
 
     private IProvider systemd;
-    private IProvider upower;
     private IProvider consolekit;
     private IProvider fallback;
 
@@ -11,12 +10,10 @@ class PowerManager {
     private IProvider? reboot_provider = null;
     private IProvider? poweroff_provider = null;
 
+
     public PowerManager () {
         systemd = new Systemd ();
         load_capabilities (systemd);
-
-        upower = new UPower ();
-        load_capabilities (upower);
 
         //  consolekit = new ConsoleKit ();
         //  load_capabilities (consolekit);
@@ -25,25 +22,31 @@ class PowerManager {
         load_capabilities (fallback);
     }
 
+
     public bool has_suspend {
         get { return (suspend_provider != null); }
     }
+
 
     public bool has_hibernate {
         get { return (hibernate_provider != null); }
     }
 
+
     public bool has_hybrid_sleep {
         get { return (hybrid_sleep_provider != null); }
     }
+
 
     public bool has_reboot {
         get { return (reboot_provider != null); }
     }
 
+
     public bool has_poweroff {
         get { return (poweroff_provider != null); }
     }
+
 
     private void get_capability (IProvider provider, PowerAction action) {
         switch (action) {
@@ -84,6 +87,7 @@ class PowerManager {
         }
     }
 
+
     private void load_capabilities (IProvider provider) {
         get_capability (provider, PowerAction.HIBERNATE);
         get_capability (provider, PowerAction.HYBRID_SLEEP);
@@ -96,23 +100,28 @@ class PowerManager {
     public void execute_action (PowerAction action) {
         switch (action) {
             case PowerAction.SUSPEND:
-                suspend_provider.execute (PowerAction.SUSPEND);
+                stdout.puts ("suspend");
+                //  suspend_provider.execute (PowerAction.SUSPEND);
                 break;
 
             case PowerAction.HIBERNATE:
-                hibernate_provider.execute (PowerAction.HIBERNATE);
+                stdout.puts ("hibernate");
+                //  hibernate_provider.execute (PowerAction.HIBERNATE);
                 break;
 
             case PowerAction.HYBRID_SLEEP:
-                hybrid_sleep_provider.execute (PowerAction.HYBRID_SLEEP);
+                stdout.puts ("hybrid_sleep");
+                //  hybrid_sleep_provider.execute (PowerAction.HYBRID_SLEEP);
                 break;
 
             case PowerAction.REBOOT:
-                reboot_provider.execute (PowerAction.REBOOT);
+                stdout.puts ("reboot");
+                //  reboot_provider.execute (PowerAction.REBOOT);
                 break;
 
             case PowerAction.POWEROFF:
-                poweroff_provider.execute (PowerAction.POWEROFF);
+                stdout.puts ("poweroff");
+                //  poweroff_provider.execute (PowerAction.POWEROFF);
                 break;
         }
     }
