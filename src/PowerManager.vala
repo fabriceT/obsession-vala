@@ -52,35 +52,35 @@ class PowerManager {
         switch (action) {
             case PowerAction.SUSPEND:
                 if (!this.has_suspend && provider.query (action) == true) {
-                    message ("Adding %s for suspend action", provider.get_name ());
+                    //  message ("Adding %s for suspend action", provider.get_name ());
                     suspend_provider = provider;
                 }
                 break;
 
             case PowerAction.HIBERNATE:
                 if (!has_hibernate && provider.query (action) == true) {
-                    message ("Adding %s for hibernation action", provider.get_name ());
+                    //  message ("Adding %s for hibernation action", provider.get_name ());
                     hibernate_provider = provider;
                 }
                 break;
 
             case PowerAction.HYBRID_SLEEP:
                 if (!has_hybrid_sleep && provider.query (action) == true) {
-                    message ("Adding %s for hybrid sleep action", provider.get_name ());
+                    //  message ("Adding %s for hybrid sleep action", provider.get_name ());
                     hybrid_sleep_provider = provider;
                 }
                 break;
 
             case PowerAction.REBOOT:
                 if (!has_reboot && provider.query (action) == true) {
-                    message ("Adding %s for reboot action", provider.get_name ());
+                    //  message ("Adding %s for reboot action", provider.get_name ());
                     reboot_provider = provider;
                 }
                 break;
 
             case PowerAction.POWEROFF:
                 if (!has_poweroff && provider.query (action) == true) {
-                    message ("Adding %s for poweroff action", provider.get_name ());
+                    //  message ("Adding %s for poweroff action", provider.get_name ());
                     poweroff_provider = provider;
                 }
                 break;
