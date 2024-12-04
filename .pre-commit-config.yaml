@@ -3,7 +3,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -11,6 +11,6 @@ repos:
       - id: check-added-large-files
 
   - repo: https://github.com/vala-lang/vala-lint
-    rev: master
+    rev: 4ed1443c35a8a84445fb59292d539358365d8263
     hooks:
       - id: vala-lint
