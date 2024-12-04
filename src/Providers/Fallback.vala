@@ -1,48 +1,63 @@
-class Fallback: IProvider, Object
-{
-    public bool query(Action action)
-    {
+class Fallback: IProvider, Object {
+
+
+    public static void execute_command (string cmd) {
+        try {
+            Process.spawn_command_line_async (cmd);
+        }
+        catch (GLib.SpawnError e) {
+            stdout.printf ("Can't spawn process: %s", e.message);
+        }
+    }
+
+
+    public bool query (PowerAction action) {
         switch (action) {
 
-            case Action.HIBERNATE:
-                return false;
-
-            case Action.HYBRID_SLEEP:
-                return false;
-
-            case Action.POWEROFF:
+            case PowerAction.HIBERNATE:
                 return true;
 
-            case Action.REBOOT:
+            case PowerAction.HYBRID_SLEEP:
                 return true;
 
-            case Action.SUSPEND:
-                return false;
+            case PowerAction.POWEROFF:
+                return true;
+
+            case PowerAction.REBOOT:
+                return true;
+
+            case PowerAction.SUSPEND:
+                return true;
 
             default:
                 return false;
         }
     }
 
-    public void execute (Action action) {
+
+    public void execute (PowerAction action) {
         switch (action) {
-            case Action.HYBRID_SLEEP:
+            case PowerAction.HIBERNATE:
                 break;
 
-            case Action.POWEROFF:
-                Process.spawn_command_line_async ("halt");
+            case PowerAction.HYBRID_SLEEP:
                 break;
 
-            case Action.REBOOT:
-                Process.spawn_command_line_async("halt -r");
+            case PowerAction.POWEROFF:
+                execute_command ("halt");
                 break;
 
-            case Action.SUSPEND:
+            case PowerAction.REBOOT:
+                execute_command ("halt -r");
+                break;
+
+            case PowerAction.SUSPEND:
                 break;
         }
     }
 
-    public string get_name() {
+
+    public string get_name () {
         return "Fallback";
     }
 }
