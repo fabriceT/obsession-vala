@@ -1,0 +1,12 @@
+name: CI
+
+on: [pull_request, push]
+
+jobs:
+  lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: elementary/actions/vala-lint@main
