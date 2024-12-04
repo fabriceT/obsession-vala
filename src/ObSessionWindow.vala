@@ -2,7 +2,7 @@ using Gtk;
 
 class ObSessionWindow : Gtk.Window {
 
-    private static string CSS_DATA =
+    private static string css_data =
     """
         button {
             font-weight: bold;
@@ -37,33 +37,33 @@ class ObSessionWindow : Gtk.Window {
     PowerManager pw;
     int row_pos;
 
-    public ObSessionWindow() {
-        pw = new PowerManager();
+    public ObSessionWindow () {
+        pw = new PowerManager ();
         this.title = "Obsession";
-        this.set_default_size(480, 200);
+        this.set_default_size (480, 200);
         this.destroy.connect (Gtk.main_quit);
         this.set_decorated (false);
         set_position (Gtk.WindowPosition.CENTER);
 
-        var screen = Gdk.Screen.get_default();
-        var css_provider = new Gtk.CssProvider();
+        var screen = Gdk.Screen.get_default ();
+        var css_provider = new Gtk.CssProvider ();
 
         try {
-            css_provider.load_from_data(CSS_DATA, -1);
+            css_provider.load_from_data (CSS_DATA, -1);
         }
         catch (Error error) {
             warning ("Error loading CSS data %s", error.message);
         }
 
-        Gtk.StyleContext.add_provider_for_screen(
+        Gtk.StyleContext.add_provider_for_screen (
             screen,
             css_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        build_ui();
+        build_ui ();
     }
 
-    public void build_ui() {
+    public void build_ui () {
         Gtk.Grid grid;
         Gtk.Button btn_quit = null;
         Gtk.Button btn_reboot = null;
@@ -79,41 +79,38 @@ class ObSessionWindow : Gtk.Window {
         grid.row_spacing = 6;
 
         btn_quit = new Gtk.Button.with_label (_("Cancel"));
-        btn_quit.get_style_context().add_class("cancel");
-        btn_quit.clicked.connect (() => { Gtk.main_quit(); });
-        add_row(grid, btn_quit);
+        btn_quit.get_style_context ().add_class ("cancel");
+        btn_quit.clicked.connect (() => { Gtk.main_quit (); });
+        add_row (grid, btn_quit);
 
-        if (pw.has_hibernate)
-        {
-            btn_hibernate = new Gtk.Button.with_label(_("Hibernate"));
-            btn_hibernate.get_style_context().add_class("hibernate");
+        if (pw.has_hibernate) {
+            btn_hibernate = new Gtk.Button.with_label (_("Hibernate"));
+            btn_hibernate.get_style_context ().add_class ("hibernate");
             btn_hibernate.clicked.connect (() => {
-                pw.hibernate();
-                Gtk.main_quit();
+                pw.hibernate ();
+                Gtk.main_quit ();
             });
-            add_row(grid, btn_hibernate);
+            add_row (grid, btn_hibernate);
         }
 
-        if (pw.has_reboot)
-        {
+        if (pw.has_reboot) {
             btn_reboot = new Gtk.Button.with_label (_("Reboot"));
-            btn_reboot.get_style_context().add_class("reboot");
+            btn_reboot.get_style_context ().add_class ("reboot");
             btn_reboot.clicked.connect (() => {
-                pw.reboot();
-                Gtk.main_quit();
+                pw.reboot ();
+                Gtk.main_quit ();
             });
-            add_row(grid, btn_reboot);
+            add_row (grid, btn_reboot);
         }
 
-        if (pw.has_poweroff)
-        {
+        if (pw.has_poweroff) {
             btn_poweroff = new Gtk.Button.with_label (_("Turn off"));
-            btn_poweroff.get_style_context().add_class("poweroff");
+            btn_poweroff.get_style_context ().add_class ("poweroff");
             btn_poweroff.clicked.connect (() => {
-                pw.poweroff();
-                Gtk.main_quit();
+                pw.poweroff ();
+                Gtk.main_quit ();
              });
-             add_row(grid, btn_poweroff);
+             add_row (grid, btn_poweroff);
         }
 
 
@@ -140,16 +137,16 @@ class ObSessionWindow : Gtk.Window {
         }*************/
 
         Label label = new Gtk.Label (_("You are about to exit the session."));
-        grid.attach(label, 0, 0, row_pos, 2);
+        grid.attach (label, 0, 0, row_pos, 2);
 
-        this.add(grid);
+        this.add (grid);
     }
 
-    private void add_row(Grid grid, Button btn) {
+    private void add_row (Grid grid, Button btn) {
         if (btn == null)
             return;
 
-        grid.attach(btn, row_pos, 2, 1, 1);
+        grid.attach (btn, row_pos, 2, 1, 1);
         row_pos++;
     }
 
@@ -157,19 +154,17 @@ class ObSessionWindow : Gtk.Window {
 
     static int main (string[] args) {
 
-        GLib.Intl.setlocale(GLib.LocaleCategory.ALL, "");
-        GLib.Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.LOCALEDIR);
-        GLib.Intl.textdomain(Config.GETTEXT_PACKAGE);
+        GLib.Intl.setlocale (GLib.LocaleCategory.ALL, "");
+        GLib.Intl.bindtextdomain (Config.GETTEXT_PACKAGE, Config.LOCALEDIR);
+        GLib.Intl.textdomain (Config.GETTEXT_PACKAGE);
 
-        message("%s - %s\n", Config.GETTEXT_PACKAGE, Config.LOCALEDIR);
+        message ("%s - %s\n", Config.GETTEXT_PACKAGE, Config.LOCALEDIR);
 
         Gtk.init (ref args);
 
-        var app = new ObSessionWindow();
+        var app = new ObSessionWindow ();
         app.show_all ();
         Gtk.main ();
         return 0;
     }
 }
-
-
